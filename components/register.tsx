@@ -1,48 +1,49 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Button, Text, View, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
-export default function Login() {
+export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const navigation = useNavigation();
 
-  async function login() {
+  async function registerAccount() {
     try {
-      const storedUser = await AsyncStorage.getItem(username);
-      if (storedUser) {
-        const user = JSON.parse(storedUser);
-        if (user.password === password) {
-          Alert.alert('Login bem-sucedido!');
-          navigation.replace('BookList');
-        } else {
-          Alert.alert('Senha incorreta!');
-        }
+      const existingUser = await AsyncStorage.getItem(username);
+      if (existingUser) {
+        Alert.alert("Este email já está cadastrado!");
       } else {
-        Alert.alert('Usuário não encontrado!');
+        userRegisterValidation(username, password);
+        const userData = { username, password };
+        await AsyncStorage.setItem(username, JSON.stringify(userData));
+        Alert.alert("Conta criada com sucesso!");
+        navigation.replace("Login");
       }
     } catch (error) {
-      Alert.alert('Erro ao efetuar login.');
+      Alert.alert("Erro ao criar conta.");
     }
-  };
+  }
+
+  function userRegisterValidation(newUsername:String, newPassword:String) {
+    
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Logar: </Text>
+      <Text style={styles.title}>Registre sua conta: </Text>
       <TextInput style={styles.input} value={username} onChangeText={setUsername} keyboardType="email-address"/>
       <TextInput style={styles.input} value={password} onChangeText={setPassword} secureTextEntry/>
-      
-      <TouchableOpacity style={styles.button} onPress={login}>
-        <Text style={styles.buttonText}> Entrar</Text>
+      <TouchableOpacity style={styles.button} onPress={registerAccount}>
+        <Text style={styles.buttonText}> Registrar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => {navigation.navigate('Register')}}>
-        <Text style={styles.buttonText}> Registrar</Text>
+      <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate("Login") }}>
+        <Text style={styles.buttonText}> Entrar</Text>
       </TouchableOpacity>
     </View>
   );
