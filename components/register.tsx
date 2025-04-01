@@ -18,31 +18,54 @@ export default function Register() {
       if (existingUser) {
         Alert.alert("Este email já está cadastrado!");
       } else {
-        userRegisterValidation(username, password);
-        const userData = { username, password };
-        await AsyncStorage.setItem(username, JSON.stringify(userData));
-        Alert.alert("Conta criada com sucesso!");
-        navigation.replace("Login");
+        if (userRegisterValidation(username, password)) {
+          const userData = { username, password };
+          await AsyncStorage.setItem(username, JSON.stringify(userData));
+          Alert.alert("Conta criada com sucesso!");
+          navigation.replace("Login");
+        } else {
+          Alert.alert("Usuário ou senha são inválidos! A senha e o usuário deve ter pelo menos 6 dígitos.");
+        }
       }
     } catch (error) {
       Alert.alert("Erro ao criar conta.");
     }
   }
 
-  function userRegisterValidation(newUsername:String, newPassword:String) {
-    
+  function userRegisterValidation(newUsername: String, newPassword: String) {
+    if (username != null && password != null) {
+      if(username.length >= 6 && password.length >= 6) {
+        return true;
+      }
+    }
+    return false;
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Registre sua conta: </Text>
-      <TextInput style={styles.input} value={username} onChangeText={setUsername} keyboardType="email-address"/>
-      <TextInput style={styles.input} value={password} onChangeText={setPassword} secureTextEntry/>
+      <TextInput
+        style={styles.input}
+        value={username}
+        onChangeText={setUsername}
+        keyboardType="email-address"
+      />
+      <TextInput
+        style={styles.input}
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
       <TouchableOpacity style={styles.button} onPress={registerAccount}>
         <Text style={styles.buttonText}> Registrar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate("Login") }}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate("Login");
+        }}
+      >
         <Text style={styles.buttonText}> Entrar</Text>
       </TouchableOpacity>
     </View>

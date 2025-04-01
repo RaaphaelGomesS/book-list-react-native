@@ -54,11 +54,11 @@ const BookList = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Digite seu book</Text>
+      <Text style={styles.titulo}>Digite o nome do seu livro</Text>
 
       <TextInput
         style={styles.input}
-        placeholder="Digite seu book"
+        placeholder="Digite o nome do seu livro"
         value={book}
         onChangeText={setBook}
       />
