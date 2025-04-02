@@ -54,17 +54,18 @@ const BookList = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Digite o nome do seu livro</Text>
+      <Text style={styles.titulo}>Lista de próximas leituras: </Text>
 
       <TextInput
         style={styles.input}
-        placeholder="Digite o nome do seu livro"
+        placeholder="Digite o nome do livro"
         value={book}
         onChangeText={setBook}
       />
       <Button
         title={editIndex !== null ? "Salvar Edição" : "Adicionar"}
         onPress={saveBook}
+        color={"#007BFF"}
       />
 
       <FlatList
@@ -101,20 +102,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#F5F5F5",
     padding: 20,
   },
   titulo: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
   },
   input: {
-    borderWidth: 1,
     padding: 10,
     width: 250,
     marginBottom: 10,
-    borderRadius: 5,
+    borderRadius: 8,
+    backgroundColor: "white",
     textAlign: "center",
   },
   itemContainer: {
@@ -122,24 +123,26 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    paddingVertical: 5,
+    paddingVertical: 5
   },
   item: {
     fontSize: 18,
     marginVertical: 5,
+    marginRight: 5,
     width: "70%",
   },
   buttonsContainer: {
     flexDirection: "row",
   },
   button: {
-    backgroundColor: "#3498db",
-    padding: 5,
+    backgroundColor: "#007BFF",
+    padding: 7,
     marginLeft: 5,
-    borderRadius: 5,
+    borderRadius: 2,
+    alignItems: "center"
   },
   buttonText: {
-    color: "white",
+    color: "white"
   },
   deleteButton: {
     backgroundColor: "red",

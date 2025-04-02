@@ -61,12 +61,12 @@ export default function Register() {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.button}
+        style={styles.link}
         onPress={() => {
           navigation.navigate("Login");
         }}
       >
-        <Text style={styles.buttonText}> Entrar</Text>
+        <Text style={styles.linkText}> Entrar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5F5F5",
+    padding: 20,
   },
 
   title: {
@@ -87,24 +88,30 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    width: "80%",
-    padding: 12,
-    marginBottom: 12,
-    backgroundColor: "white",
+    padding: 10,
+    width: 250,
+    marginBottom: 10,
     borderRadius: 8,
+    backgroundColor: "white",
+    textAlign: "center",
+  },
+
+  buttonsContainer: {
+    flexDirection: "row",
   },
 
   button: {
-    width: "80%",
-    padding: 12,
     backgroundColor: "#007BFF",
-    borderRadius: 8,
-    alignItems: "center",
+    padding: 10,
+    width: 250,
+    marginBottom: 10,
+    borderRadius: 5,
+    alignItems: "center"
   },
 
   buttonText: {
     color: "white",
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
 
   link: {
@@ -113,5 +120,5 @@ const styles = StyleSheet.create({
 
   linkText: {
     color: "#007BFF",
-  },
+  }
 });
